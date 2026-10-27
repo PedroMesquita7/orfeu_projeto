@@ -102,6 +102,17 @@ npm run assets
 
 ## Publicar
 
+> Abrir o `index.html` direto (duplo clique) mostra uma página em branco: o conteúdo é gerado pelo Vite.
+> Use `npm run dev` para ver localmente, ou publique o build.
+
+### GitHub Pages (para validação)
+
+1. Suba o projeto para um repositório no GitHub (branch `main`).
+2. No repositório, vá em **Settings → Pages** e, em **Source**, escolha **GitHub Actions**.
+3. O workflow `.github/workflows/deploy.yml` roda a cada push e publica em `https://<usuario>.github.io/<repositorio>/`.
+
+Os caminhos do site são relativos (`base: './'` no `vite.config.ts`), então ele funciona tanto nesse subcaminho quanto num domínio próprio depois.
+
 ### Vercel
 
 1. Suba a pasta para um repositório no GitHub.

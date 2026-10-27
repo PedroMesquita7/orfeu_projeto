@@ -59,20 +59,20 @@ function head() {
 <link rel="canonical" href="${s.url}/" />
 <meta name="theme-color" content="${s.themeColor}" />
 <meta name="color-scheme" content="dark" />
-<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="pt_BR" />
 <meta property="og:site_name" content="Orfeu Áudio" />
 <meta property="og:title" content="${esc(s.title)}" />
 <meta property="og:description" content="${esc(s.description)}" />
 <meta property="og:url" content="${s.url}/" />
-<meta property="og:image" content="${s.url}${s.ogImage}" />
+<meta property="og:image" content="${s.url}/${s.ogImage}" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="${esc(s.title)}" />
 <meta name="twitter:description" content="${esc(s.description)}" />
-<meta name="twitter:image" content="${s.url}${s.ogImage}" />
+<meta name="twitter:image" content="${s.url}/${s.ogImage}" />
 <script type="application/ld+json">${JSON.stringify(ld)}</script>`
 }
 
@@ -122,7 +122,7 @@ function hero() {
       ${btn(h.ctaSecondary.label, h.ctaSecondary.href, 'ghost')}
     </div>
   </div>
-  <img class="still hero__still" src="/fallback/hero.webp" width="1200" height="900" loading="lazy" alt="Amplificador Orfeu I-300 em vista translúcida, com as válvulas 300B acesas" />
+  <img class="still hero__still" src="fallback/hero.webp" width="1200" height="900" loading="lazy" alt="Amplificador Orfeu I-300 em vista translúcida, com as válvulas 300B acesas" />
   <div class="wrap hero__foot">
     <ul class="stats" aria-label="Destaques do I-300">
       ${h.stats.map((s) => `<li><span class="stats__v">${esc(s.value)}${s.unit ? `<small>${esc(s.unit)}</small>` : ''}</span><span class="stats__c">${esc(s.caption)}</span></li>`).join('<li class="stats__dot" aria-hidden="true">·</li>')}
@@ -146,7 +146,7 @@ function disassembly() {
           .map((s, i) => {
             const n = String(i + 1).padStart(2, '0')
             return `<li class="dis-step" data-step="${i}">
-          <img class="still dis-step__img" src="/fallback/step-${i + 1}.webp" width="1200" height="900" loading="lazy" alt="Etapa ${n}: ${esc(plain(s.title))}" />
+          <img class="still dis-step__img" src="fallback/step-${i + 1}.webp" width="1200" height="900" loading="lazy" alt="Etapa ${n}: ${esc(plain(s.title))}" />
           <div class="dis-step__text">
             <p class="dis-step__count mono">ETAPA ${n} / ${total} · ${esc(s.short.toUpperCase())}</p>
             <h3 class="dis-step__title">${rich(s.title)}</h3>
@@ -210,7 +210,7 @@ function processSection() {
       <p class="lead" data-reveal>${esc(p.intro)}</p>
     </header>
     <figure class="media media--loop" data-reveal>
-      <div class="media__img" role="img" aria-label="${esc(p.media.alt)}"><img src="/media/atelie-valvulas.webp" alt="" width="1600" height="900" loading="lazy" /></div>
+      <div class="media__img" role="img" aria-label="${esc(p.media.alt)}"><img src="media/atelie-valvulas.webp" alt="" width="1600" height="900" loading="lazy" /></div>
       <figcaption class="media__cap mono"><span class="rec" aria-hidden="true"></span>${esc(p.media.caption)}</figcaption>
     </figure>
     <div class="timeline">

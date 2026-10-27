@@ -29,6 +29,8 @@ function prerender(): Plugin {
 }
 
 export default defineConfig({
+  // Caminhos relativos: funciona tanto na raiz de um domínio quanto em usuario.github.io/repo/
+  base: './',
   plugins: [prerender()],
   build: {
     target: 'es2020',

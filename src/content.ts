@@ -14,7 +14,7 @@ export const site = {
   title: 'Orfeu Áudio — amplificadores valvulados feitos à mão em São Paulo',
   description:
     'Ateliê paulistano que projeta e monta à mão amplificadores valvulados 300B, pré-amplificadores e caixas acústicas de alta fidelidade. 40 peças por ano. Audição com hora marcada em Pinheiros.',
-  ogImage: '/og.jpg',
+  ogImage: 'og.jpg',
   themeColor: '#06141B',
 }
 
@@ -250,7 +250,7 @@ export const specs = {
     'Integrado single-ended com 300B, sem realimentação global e fiação ponto a ponto. Os números abaixo são medidos em cada unidade antes da entrega.',
   download: {
     label: 'Baixar ficha técnica',
-    href: '/downloads/orfeu-i300-ficha-tecnica.pdf',
+    href: 'downloads/orfeu-i300-ficha-tecnica.pdf',
     meta: 'PDF · 1 PÁGINA',
   },
   rows: [
@@ -350,7 +350,7 @@ export const footer = {
     {
       title: 'Suporte',
       links: [
-        { label: 'Ficha técnica (PDF)', href: '/downloads/orfeu-i300-ficha-tecnica.pdf' },
+        { label: 'Ficha técnica (PDF)', href: 'downloads/orfeu-i300-ficha-tecnica.pdf' },
         { label: 'Garantia', href: '#especificacoes' },
         { label: 'Troca de válvulas', href: 'mail' },
         { label: 'Manutenção', href: 'mail' },
