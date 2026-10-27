@@ -1,0 +1,29 @@
+:root {
+  /* Paleta obrigatória */
+  --bg: #06141b;
+  --surface: #11212d;
+  --line: #253745;
+  --muted: #4a5c6a;
+  --text-2: #9babab;
+  --text: #ccd0cf;
+
+  /* Tipografia: serifada (títulos) · sans (texto) · mono (rótulos e specs) */
+  --serif: 'Fraunces Variable', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter Variable', Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --gutter: clamp(20px, 4.4vw, 72px);
+  --maxw: 1440px;
+  --nav-h: 68px;
+  --radius: 18px;
+  --ease: cubic-bezier(0.2, 0.7, 0.1, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+
+  color-scheme: dark;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --nav-h: 60px;
+  }
+}

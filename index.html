@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <!--head-->
+    <script>
+      // Decide o modo antes da primeira pintura (evita "pulo" de layout).
+      ;(function () {
+        var d = document.documentElement
+        d.classList.add('js')
+        var q = location.search
+        var rm = matchMedia('(prefers-reduced-motion: reduce)').matches || /[?&]static\b/.test(q)
+        var gl = false
+        try {
+          var c = document.createElement('canvas')
+          gl = !!(c.getContext('webgl2') || c.getContext('webgl'))
+        } catch (e) {}
+        if (/[?&]nogl\b/.test(q)) gl = false
+        if (rm) d.classList.add('reduced')
+        if (!rm && gl) d.classList.add('is-3d')
+        if (/[?&]capture=/.test(q)) d.classList.add('capture')
+        // Segurança: se o JS principal falhar, nada fica invisível.
+        setTimeout(function () {
+          if (!window.__orfeuReady) d.classList.add('noanim')
+        }, 2500)
+      })()
+    </script>
+  </head>
+  <body>
+    <!--app-->
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

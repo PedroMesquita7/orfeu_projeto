@@ -1,0 +1,366 @@
+/* =========================================================
+   Cromo fixo: fundo, grão, enquadramento, menu, palco 3D
+   ========================================================= */
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  background:
+    radial-gradient(110% 85% at 78% 22%, rgba(37, 55, 69, 0.62) 0%, rgba(17, 33, 45, 0.55) 34%, rgba(6, 20, 27, 0) 72%),
+    radial-gradient(80% 70% at 8% 96%, rgba(17, 33, 45, 0.9) 0%, rgba(6, 20, 27, 0) 62%),
+    var(--bg);
+}
+.bg__mist,
+.bg__mist::after {
+  position: absolute;
+  inset: -20%;
+  content: '';
+  background: radial-gradient(40% 32% at 30% 40%, rgba(37, 55, 69, 0.5), transparent 70%);
+  filter: blur(40px);
+  animation: mist 38s var(--ease-io) infinite alternate;
+}
+.bg__mist::after {
+  inset: 0;
+  background: radial-gradient(36% 30% at 72% 68%, rgba(74, 92, 106, 0.22), transparent 70%);
+  animation-duration: 52s;
+  animation-direction: alternate-reverse;
+}
+@keyframes mist {
+  to {
+    transform: translate3d(8%, -6%, 0) scale(1.12);
+  }
+}
+
+.grain {
+  position: fixed;
+  inset: -100px;
+  z-index: 95;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 1.4s steps(6) infinite;
+}
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-40px, 30px); }
+  40% { transform: translate(30px, -50px); }
+  60% { transform: translate(-60px, -20px); }
+  80% { transform: translate(50px, 40px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Marcas de enquadramento (visor de câmera) */
+.frame {
+  position: fixed;
+  inset: 12px;
+  z-index: 96;
+  pointer-events: none;
+}
+.frame__c {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 0 solid var(--muted);
+}
+.frame__c--tl { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+.frame__c--tr { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+.frame__c--bl { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+.frame__c--br { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+.frame__ro {
+  position: absolute;
+  bottom: 2px;
+  font: 400 10px/1 var(--mono);
+  letter-spacing: 0.2em;
+  color: var(--muted);
+}
+.frame__ro--l { left: 28px; }
+.frame__ro--r { right: 28px; }
+
+/* Menu */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  height: var(--nav-h);
+}
+.nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 33, 45, 0.55);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  border-bottom: 1px solid rgba(37, 55, 69, 0.85);
+}
+.nav__bar {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  line-height: 1;
+}
+.logo__name {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  font-variation-settings: 'opsz' 48;
+}
+.logo__bar {
+  width: 1px;
+  height: 16px;
+  background: var(--muted);
+}
+.logo__sub {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.32em;
+  color: var(--text-2);
+}
+.nav__links ul {
+  display: flex;
+  gap: clamp(20px, 2.6vw, 40px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav__links a {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-2);
+  transition: color 0.3s;
+}
+.nav__links a .mono {
+  font-size: 9.5px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+.nav__links a:hover,
+.nav__links a[aria-current='true'] {
+  color: var(--text);
+}
+.nav__end {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav__toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--muted);
+  position: relative;
+}
+.nav__toggle span {
+  position: absolute;
+  left: 13px;
+  right: 13px;
+  height: 1px;
+  background: var(--text);
+  transition: transform 0.35s var(--ease);
+}
+.nav__toggle span:first-child { top: 17px; }
+.nav__toggle span:last-child { top: 24px; }
+.nav__toggle[aria-expanded='true'] span:first-child { transform: translateY(3.5px) rotate(45deg); }
+.nav__toggle[aria-expanded='true'] span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+
+.progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  pointer-events: none;
+}
+.progress__bar {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--muted), var(--text));
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+}
+
+@media (max-width: 900px) {
+  .nav__toggle {
+    display: block;
+  }
+  .nav__links {
+    position: fixed;
+    inset: var(--nav-h) 0 auto 0;
+    height: calc(100svh - var(--nav-h));
+    background: rgba(6, 20, 27, 0.97);
+    backdrop-filter: blur(18px);
+    padding: 40px var(--gutter);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition:
+      opacity 0.35s var(--ease),
+      transform 0.35s var(--ease),
+      visibility 0s 0.35s;
+  }
+  .nav__links[data-open='true'] {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition:
+      opacity 0.35s var(--ease),
+      transform 0.35s var(--ease);
+  }
+  .nav__links ul {
+    flex-direction: column;
+    gap: 0;
+  }
+  .nav__links li {
+    border-bottom: 1px solid var(--line);
+  }
+  .nav__links a {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 36px;
+    color: var(--text);
+    padding: 18px 0;
+    gap: 16px;
+  }
+  .nav__links a .mono {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-2);
+  }
+  .frame__ro {
+    display: none;
+  }
+  .frame {
+    inset: 8px;
+  }
+  .frame__c {
+    width: 12px;
+    height: 12px;
+  }
+}
+@media (max-width: 420px) {
+  .nav__end .btn {
+    padding-left: 14px;
+    gap: 10px;
+  }
+}
+
+/* Palco 3D (fixo atrás do hero e da desmontagem) */
+.stage {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+html:not(.is-3d) .stage {
+  display: none;
+}
+.stage__canvas {
+  width: 100%;
+  height: 100%;
+}
+.callouts {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.callout {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.callout__dot {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  left: -4.5px;
+  top: -4.5px;
+  border-radius: 50%;
+  border: 1px solid var(--text);
+  box-shadow: 0 0 0 4px rgba(204, 208, 207, 0.08);
+}
+.callout svg {
+  position: absolute;
+  left: 0;
+  top: -40px;
+  overflow: visible;
+  color: var(--text-2);
+}
+.callout__t {
+  position: absolute;
+  left: 76px;
+  top: -47px;
+  white-space: nowrap;
+  font: 400 10.5px/1 var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text);
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(6, 20, 27, 0.7);
+  backdrop-filter: blur(6px);
+}
+.callout--flip svg {
+  transform: scaleX(-1);
+}
+.callout--flip .callout__t {
+  left: auto;
+  right: 76px;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Estado "revelar": fade + blur (só com JS e sem reduced-motion) */
+.js:not(.reduced):not(.noanim) [data-reveal]:not(.is-in) {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(18px);
+}
+
+/* Modo captura (gera as imagens de fallback) */
+.capture,
+.capture body {
+  background: transparent !important;
+}
+.capture .bg,
+.capture .grain,
+.capture .frame,
+.capture .nav,
+.capture main,
+.capture .footer,
+.capture .skip,
+.capture .callouts {
+  display: none !important;
+}
+.capture.capture-bg .bg {
+  display: block !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain,
+  .bg__mist,
+  .bg__mist::after {
+    animation: none;
+  }
+  .btn,
+  .btn__icon svg {
+    transition: none;
+  }
+}
